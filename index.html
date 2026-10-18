@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Pembayaran Kas CRAST 107.8 FM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Unbounded:wght@500;800&family=DM+Sans:wght@400;500;700&display=swap">
+<style>
+:root{--bg:#eef2ff;--surface:#fff;--ink:#1b1f4b;--muted:#5a6089;--line:#d3d9f5;--navy:#1b1f4b;--coral:#ff5a5f;--sun:#ffc93c;--teal:#19b8a6;
+ box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#12142e;--surface:#1d2150;--ink:#f2f4ff;--muted:#a3a9d6;--line:#33397a}}
+:root[data-theme="dark"]{--bg:#12142e;--surface:#1d2150;--ink:#f2f4ff;--muted:#a3a9d6;--line:#33397a}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"DM Sans",system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.5;min-height:100vh}
+h1,h2,h3{font-family:"Unbounded","DM Sans",system-ui,sans-serif;margin:0;line-height:1.15}
+button,input{font:inherit;color:inherit}
+:focus-visible{outline:3px solid var(--coral);outline-offset:2px}
+.view{display:none;max-width:600px;margin:0 auto;padding:0 18px 48px}
+.view.on{display:block}
+
+/* equalizer */
+.eq{display:flex;align-items:flex-end;gap:4px;height:28px}
+.eq i{display:block;width:6px;border-radius:3px;height:40%}
+.eq i:nth-child(1){background:var(--coral);height:55%}
+.eq i:nth-child(2){background:var(--sun);height:90%}
+.eq i:nth-child(3){background:var(--teal);height:45%}
+.eq i:nth-child(4){background:var(--coral);height:75%}
+.eq i:nth-child(5){background:var(--sun);height:35%}
+@media (prefers-reduced-motion:no-preference){
+ .eq i{animation:bar 1s ease-in-out infinite alternate}
+ .eq i:nth-child(2){animation-duration:.7s}.eq i:nth-child(3){animation-duration:1.2s}.eq i:nth-child(4){animation-duration:.85s}.eq i:nth-child(5){animation-duration:1.05s}
+ .needle{animation:tune 2.2s cubic-bezier(.2,.8,.2,1) both}
+ .wave{animation:ping 2.4s ease-out infinite}
+}
+@keyframes bar{from{height:18%}to{height:100%}}
+@keyframes tune{from{transform:translateX(-55px)}to{transform:translateX(0)}}
+@keyframes ping{0%{opacity:.9;transform:scale(.6)}100%{opacity:0;transform:scale(1.4)}}
+
+/* cover */
+#cover{max-width:none;min-height:100vh;padding:0;background:var(--navy);color:#fff;flex-direction:column;justify-content:space-between;
+ background-image:radial-gradient(circle at 15% 12%,rgba(255,90,95,.35),transparent 40%),radial-gradient(circle at 90% 30%,rgba(25,184,166,.3),transparent 38%),radial-gradient(circle at 50% 100%,rgba(255,201,60,.22),transparent 45%)}
+#cover.on{display:flex}
+.cv-in{width:100%;max-width:560px;margin:0 auto;padding:34px 24px 0;text-align:center}
+.pill{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.1);border-radius:99px;padding:7px 14px;font-size:14px;margin-bottom:22px}
+.cv-in h1{font-weight:800;font-size:clamp(30px,9vw,50px);letter-spacing:-.02em}
+.cv-in h1 span{display:block;font-weight:500;font-size:.46em;letter-spacing:0;color:var(--sun);margin-bottom:10px}
+.radio{width:100%;max-width:380px;margin:26px auto 0;display:block;overflow:visible}
+.cv-bot{width:100%;max-width:560px;margin:0 auto;padding:26px 24px calc(30px + env(safe-area-inset-bottom,0px))}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;width:100%;border:0;border-radius:14px;padding:16px 22px;font-weight:700;font-size:16px;background:var(--sun);color:var(--navy);cursor:pointer;text-decoration:none;box-shadow:0 4px 0 #c99a14}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 #c99a14}
+.btn.ghost{background:transparent;color:var(--ink);border:2px solid var(--line);box-shadow:none;margin-top:12px}
+.btn.teal{background:var(--teal);box-shadow:0 4px 0 #0e8174}
+
+/* inner pages */
+.topbar{display:flex;justify-content:space-between;align-items:center;padding:18px 0 10px}
+.back{background:none;border:0;padding:8px 0;color:var(--muted);cursor:pointer}
+.banner{background:var(--navy);color:#fff;border-radius:20px;padding:20px;margin:6px 0 22px;position:relative;overflow:hidden}
+.banner::after{content:"";position:absolute;right:-30px;top:-30px;width:110px;height:110px;border-radius:50%;border:12px solid rgba(255,201,60,.35);box-shadow:0 0 0 14px rgba(255,90,95,.25)}
+.banner h2{font-size:22px;position:relative;z-index:1}
+.banner p{margin:6px 0 0;color:#c9ceff;position:relative;z-index:1}
+.step{margin-bottom:24px}
+.step>h3{font-size:16px;margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.step>h3 b{display:grid;place-items:center;width:28px;height:28px;border-radius:50%;background:var(--coral);color:#fff;font-size:14px;flex:none}
+.price{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.price div{border-radius:16px;padding:14px;color:var(--navy)}
+.price div:first-child{background:var(--sun)}
+.price div:last-child{background:var(--teal)}
+.price small{display:block;font-weight:500}
+.price strong{font-family:"Unbounded",sans-serif;font-size:18px;font-weight:500}
+.card{background:var(--surface);border:2px solid var(--line);border-radius:16px;padding:14px 16px;margin-bottom:10px}
+.card.a{border-left:8px solid var(--coral)}
+.card.b{border-left:8px solid var(--teal)}
+.card b{display:block}
+.card .acc{font-family:"Unbounded",sans-serif;font-size:19px;font-weight:500;margin:4px 0 2px;word-break:break-all}
+.card small{color:var(--muted)}
+.copy{display:block;margin-top:10px;border:2px solid var(--line);background:transparent;border-radius:10px;padding:8px 14px;cursor:pointer;font-weight:700}
+.frame{border-radius:16px;overflow:hidden;border:2px solid var(--line);background:#fff}
+.frame iframe{display:block;width:100%;height:1150px;border:0}
+.open{display:block;text-align:center;margin:12px 0 0;color:var(--muted)}
+.open a{color:var(--ink);font-weight:700}
+.dot{text-align:center;margin:30px 0 8px}
+
+/* done */
+.done{text-align:center;padding-top:34px}
+.done .eq{justify-content:center;height:44px;margin-bottom:16px}
+.done .eq i{width:9px}
+.done h2{font-size:26px;margin-bottom:8px}
+.done p{color:var(--muted);margin:0 0 26px}
+</style>
+</head>
+<body>
+
+<section id="cover" class="view on">
+  <div class="cv-in">
+    <div class="pill"><div class="eq" style="height:16px" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>Kas organisasi</div>
+    <h1><span>Pembayaran Kas</span>CRAST<br>107.8 FM</h1>
+    <svg class="radio" viewBox="0 0 320 210" role="img" aria-label="Ilustrasi radio dengan frekuensi 107.8">
+      <defs><pattern id="grille" width="9" height="9" patternUnits="userSpaceOnUse"><circle cx="4.5" cy="4.5" r="2" fill="#ffc93c" opacity=".85"/></pattern></defs>
+      <circle class="wave" cx="292" cy="14" r="26" fill="none" stroke="#ffc93c" stroke-width="2" style="transform-origin:292px 14px"/>
+      <line x1="240" y1="52" x2="292" y2="14" stroke="#fff" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="292" cy="14" r="7" fill="#ffc93c"/>
+      <path d="M70 52 Q70 24 100 24 L150 24 Q180 24 180 52" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/>
+      <rect x="10" y="50" width="300" height="152" rx="26" fill="#ff5a5f"/>
+      <rect x="10" y="50" width="300" height="152" rx="26" fill="none" stroke="#fff" stroke-opacity=".3" stroke-width="3"/>
+      <circle cx="96" cy="126" r="56" fill="#1b1f4b"/>
+      <circle cx="96" cy="126" r="48" fill="url(#grille)"/>
+      <rect x="172" y="72" width="124" height="46" rx="10" fill="#1b1f4b"/>
+      <g stroke="#fff" stroke-opacity=".6" stroke-width="2"><line x1="184" y1="104" x2="184" y2="112"/><line x1="200" y1="108" x2="200" y2="112"/><line x1="216" y1="104" x2="216" y2="112"/><line x1="232" y1="108" x2="232" y2="112"/><line x1="248" y1="104" x2="248" y2="112"/><line x1="264" y1="108" x2="264" y2="112"/><line x1="280" y1="104" x2="280" y2="112"/></g>
+      <text x="184" y="94" font-family="Unbounded,sans-serif" font-size="13" fill="#ffc93c">107.8</text>
+      <rect class="needle" x="246" y="76" width="3" height="38" rx="1.5" fill="#19b8a6"/>
+      <circle cx="206" cy="160" r="20" fill="#ffc93c"/><line x1="206" y1="160" x2="214" y2="147" stroke="#1b1f4b" stroke-width="4" stroke-linecap="round"/>
+      <circle cx="262" cy="160" r="20" fill="#19b8a6"/><line x1="262" y1="160" x2="251" y2="148" stroke="#1b1f4b" stroke-width="4" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="cv-bot"><button class="btn" id="start">Bayar kas</button></div>
+</section>
+
+<section id="pay" class="view">
+  <div class="topbar"><button class="back" data-go="cover">‹ Kembali</button><div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div></div>
+  <div class="banner"><h2>Bayar kas CRAST</h2><p>Baca info, bayar, lalu isi form dan upload bukti.</p></div>
+
+  <div class="step">
+    <h3><b>1</b>Nominal kas</h3>
+    <div class="price">
+      <div><small>Per bulan</small><strong>Rp15.000</strong></div>
+      <div><small>Lunas satu periode</small><strong>Rp150.000</strong></div>
+    </div>
+  </div>
+
+  <div class="step">
+    <h3><b>2</b>Pilih cara bayar</h3>
+    <div class="card a">
+      <b>Seabank</b><div class="acc">901723704192</div><small>a.n. Tsamara Allodya Winnerdy</small>
+      <button type="button" class="copy" id="copy">Salin nomor rekening</button>
+    </div>
+    <div class="card b">
+      <b>Cash</b><small>Serahkan ke Una atau Tsamara. Bukti: foto kamu dengan uang bersama bendahara yang menerima.</small>
+    </div>
+  </div>
+
+  <div class="step">
+    <h3><b>3</b>Isi form dan upload bukti</h3>
+    <div class="frame">
+      <iframe id="gf" title="Form pembayaran kas CRAST" loading="lazy" src="https://docs.google.com/forms/d/e/1FAIpQLSdT0ab7VNbaZ0Tr-UNmTdaw4KbomKikxHX4hc75BP_mKep6ig/viewform?embedded=true">Memuat form…</iframe>
+    </div>
+    <p class="open">Form tidak muncul? <a id="gfopen" target="_blank" rel="noopener" href="https://docs.google.com/forms/d/e/1FAIpQLSdT0ab7VNbaZ0Tr-UNmTdaw4KbomKikxHX4hc75BP_mKep6ig/viewform">Buka di tab baru</a></p>
+  </div>
+
+  <button class="btn teal" id="next">Sudah submit, lihat rekap</button>
+</section>
+
+<section id="done" class="view">
+  <div class="done">
+    <div class="eq" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+    <h2>Makasih, sudah bayar kas!</h2>
+    <p>Cek rekapitulasi untuk memastikan pembayaranmu sudah tercatat.</p>
+    <a class="btn" id="rekap" target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1Y2Kt8xWB5v5uU_pWCY7Ewj8_5PntMTfPmXiF65rJN6o/edit?gid=0#gid=0">Buka rekapitulasi kas</a>
+    <button class="btn ghost" data-go="cover">Kembali ke awal</button>
+  </div>
+</section>
+
+<script>
+var $=function(s){return document.querySelector(s)};
+function show(id){
+  document.querySelectorAll(".view").forEach(function(v){v.classList.toggle("on",v.id===id)});
+  window.scrollTo(0,0);
+}
+document.querySelectorAll("[data-go]").forEach(function(b){b.onclick=function(){show(b.dataset.go)}});
+$("#start").onclick=function(){show("pay")};
+$("#next").onclick=function(){show("done")};
+$("#copy").onclick=function(e){
+  var b=e.target;
+  var done=function(){b.textContent="Nomor tersalin";setTimeout(function(){b.textContent="Salin nomor rekening"},1800)};
+  try{navigator.clipboard.writeText("901723704192").then(done,done)}catch(x){done()}
+};
+</script>
+</body>
+</html>
