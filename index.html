@@ -89,7 +89,10 @@ select:disabled{opacity:.55}
 .chip input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
 .chip input:disabled{cursor:not-allowed}
 .chip span{display:block;text-align:center;padding:11px 2px;border:2px solid var(--line);border-radius:10px;background:var(--surface);font-size:14px}
-.chip input:checked+span{background:var(--navy);color:#fff;border-color:var(--navy)}
+.chip input:checked+span{background:var(--teal);color:var(--navy);border-color:var(--teal);font-weight:700;box-shadow:0 0 0 3px rgba(25,184,166,.35)}
+.chip input:checked+span::before{content:"✓ "}
+.pick{font-weight:700;margin:10px 0 0;padding:9px 12px;border-radius:10px;background:var(--surface);border:2px dashed var(--line);color:var(--muted)}
+.pick.has{border-style:solid;border-color:var(--teal);color:var(--ink)}
 .chip input:disabled+span{background:transparent;color:var(--muted);text-decoration:line-through;opacity:.6}
 .chip input:focus-visible+span{outline:3px solid var(--coral);outline-offset:2px}
 .mini{background:none;border:0;color:var(--coral-text);font-weight:700;cursor:pointer;padding:8px 0}
@@ -201,6 +204,7 @@ select:disabled{opacity:.55}
       <div class="field">
         <span class="lbl">Bayar bulan apa</span>
         <div class="chips" id="chips"></div>
+        <p class="pick" id="pick" aria-live="polite">Belum ada bulan dipilih.</p>
         <p class="hint" id="moHint">Pilih nama dulu untuk melihat bulan yang tersedia.</p>
         <button type="button" class="mini" id="all" hidden>Pilih semua bulan yang belum dibayar</button>
       </div>
@@ -332,7 +336,12 @@ function renderMonths(){
 $("#chips").addEventListener("change",total);
 $("#all").onclick=function(){document.querySelectorAll("#chips input:not(:disabled)").forEach(function(i){i.checked=true});total()};
 function picked(){return [].slice.call(document.querySelectorAll("#chips input:checked")).map(function(i){return +i.value})}
-function total(){$("#total").textContent=rp(picked().length*PRICE)}
+function total(){
+  var p=picked(),k=$("#pick");
+  $("#total").textContent=rp(p.length*PRICE);
+  if(p.length){k.textContent="Dipilih: "+p.map(function(i){return MONTHS[i]}).join(", ")+" ("+p.length+" bulan)";k.classList.add("has")}
+  else{k.textContent="Belum ada bulan dipilih.";k.classList.remove("has")}
+}
 
 $("#proof").onchange=function(){
   var f=this.files[0],box=$("#proofBox"),img=$("#prev");
